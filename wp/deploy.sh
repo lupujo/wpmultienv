@@ -29,7 +29,7 @@ echo "Getting original wwwhost..."
 OLDWWWHOST=`cat /wpmultienv/www/wwwhost`
 
 echo "Removing undesired files..."
-rm -rf /wpmultienv/www/wp-content/cache/* /wp-content/cache-old/* /wp-content/backupwordpress-* /wp-content/mmr/*
+rm -rf /wpmultienv/www/wwwhost /wpmultienv/www/wp-content/cache/* /wp-content/cache-old/* /wp-content/backupwordpress-* /wp-content/mmr/* 
 
 if [ "$WWWHOST" = "$PRODHOST" ]; then
 	echo "Detected deployment to production!"
