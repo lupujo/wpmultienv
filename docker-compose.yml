@@ -33,9 +33,11 @@ services:
      hostname: wordpress-env1
      volumes:
        - ${MAINFOLDER}/env1/www:/var/www/html
+       - ${MAINFOLDER}/env1/ssl:/etc/apache2/ssl
        - ${PROJFOLDER}/.env:/wpmultienv/env
      ports:
              - ${ENV1IP}:80:80
+             - ${ENV1IP}:443:443
      restart: always
      environment:
        APACHE_RUN_USER: www-data
@@ -81,9 +83,11 @@ services:
      hostname: wordpress-env2
      volumes:
        - ${MAINFOLDER}/env2/www:/var/www/html
+       - ${MAINFOLDER}/env2/ssl:/etc/apache2/ssl
        - ${PROJFOLDER}/.env:/wpmultienv/env
      ports:
              - ${ENV2IP}:80:80
+             - ${ENV2IP}:443:443
      restart: always
      environment:
        APACHE_RUN_USER: www-data
@@ -129,9 +133,11 @@ services:
      hostname: wordpress-env3
      volumes:
        - ${MAINFOLDER}/env3/www:/var/www/html
+       - ${MAINFOLDER}/env3/ssl:/etc/apache2/ssl
        - ${PROJFOLDER}/.env:/wpmultienv/env
      ports:
              - ${ENV3IP}:80:80
+             - ${ENV3IP}:443:443
      restart: always
      environment:
        APACHE_RUN_USER: www-data
