@@ -30,6 +30,8 @@ services:
            - WWWDATA_GID=${ENV1GID}
            - WWWHOST=${ENV1WWWHOST}
      container_name: wordpress-env1
+     extra_hosts:
+           - smtphost.pointer:${SMTPIP}
      hostname: wordpress-env1
      volumes:
        - ${MAINFOLDER}/env1/www:/var/www/html
@@ -80,6 +82,8 @@ services:
            - WWWDATA_GID=${ENV2GID}
            - WWWHOST=${ENV2WWWHOST}
      container_name: wordpress-env2
+     extra_hosts:
+           - smtphost.pointer:${SMTPIP}
      hostname: wordpress-env2
      volumes:
        - ${MAINFOLDER}/env2/www:/var/www/html
@@ -130,6 +134,8 @@ services:
            - WWWDATA_GID=${ENV1GID}
            - WWWHOST=${ENV3WWWHOST}
      container_name: wordpress-env3
+     extra_hosts:
+           - smtphost.pointer:${SMTPIP}
      hostname: wordpress-env3
      volumes:
        - ${MAINFOLDER}/env3/www:/var/www/html
