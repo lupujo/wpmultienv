@@ -16,3 +16,5 @@ RUN ln -s /etc/apache2/mods-available/ssl.load /etc/apache2/mods-enabled/ssl.loa
 RUN ln -s /etc/apache2/mods-available/socache_shmcb.load /etc/apache2/mods-enabled/socache_shmcb.load
 RUN perl -p -i -e 's/SSLCertificate[File|Key].*//' /etc/apache2/sites-available/default-ssl.conf
 RUN perl -p -i -e 's/SSLEngine on/SSLEngine on\n\t\tSSLCertificateFile \/etc\/apache2\/ssl\/ssl.cert\n\t\tSSLCertificateKeyFile \/etc\/apache2\/ssl\/ssl.key\n\t\tSSLCertificateChainFile \/etc\/apache2\/ssl\/ssl.cert/' /etc/apache2/sites-available/default-ssl.conf
+RUN perl -p -i -e 's/SSLProtocol all -SSLv3/SSLProtocol all -SSLv3 -TLSv1 -TLSv1.1/' /etc/apache2/mods-available/ssl.conf
+RUN perl -p -i -e 's/\#SSLHonorCipherOrder on/SSLHonorCipherOrder on/' /etc/apache2/mods-available/ssl.conf
