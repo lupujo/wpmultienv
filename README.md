@@ -24,9 +24,9 @@ jonathan.l@ongage.com
 * Run init.sh before first launch from the project folder.
 * Launch by running ```docker-compose up -d``` from the project folder.
 * It's highly recommended to block web access to /wp-admin in the production environment and only use wp-admin under development environments.
-* Optional: Update SSL key and certificate for envs you wish to use HTTPS:
-** SSL Key: [Main Folder]/env[1-3]/ssl/ssl.key
-** SSL Certificate & Chain: [Main Folder]/env[1-3]/ssl/ssl.cert
+* Optional: Update SSL key and certificate for envs you wish to use HTTPS: \
+SSL Key: ```[Main Folder]/env[1-3]/ssl/ssl.key``` \
+SSL Certificate & Chain: ```[Main Folder]/env[1-3]/ssl/ssl.cert```
 * Optional: Create robots.txt-dev (usually deny all) and robots.txt-prod (usually allow all) per your needs in the Wordpress webroot folder, those will be deployed automatically depending on environment.
 
 # How it works
