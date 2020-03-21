@@ -75,8 +75,8 @@ mv /wpmultienv/www/* /var/www/html/
 echo "Clearing opcache if exists..."
 /usr/local/bin/cachetool opcache:reset >/dev/null 2>&1
 
-if [ "$WWWHOST" = "$PRODWWWHOST" ]; then
-	echo "Executing post deployment script for production if available..."
+if [ "$WWWHOST" = "$PRODWWWHOST" ] || [ "$WWWHOST" = "$STAGEWWWHOST" ]; then
+	echo "Executing post deployment script for production/staging if available..."
 	if [ -f /var/www/html/wpmultienv/post-deploy-prod.sh ]; then
 		bash /var/www/html/wpmultienv/post-deploy-prod.sh
 	fi
