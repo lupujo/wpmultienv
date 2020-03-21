@@ -26,10 +26,10 @@ chown -R www-data:www-data /wpmultienv/www
 bzcat /wpmultienv/sql.bz2 > /wpmultienv/sql
 
 echo "Getting original wwwhost..."
-OLDWWWHOST=`cat /wpmultienv/www/wwwhost`
+OLDWWWHOST=`cat /wpmultienv/www/wpmultienv/wwwhost`
 
 echo "Removing undesired files..."
-rm -rf /wpmultienv/www/wwwhost /wpmultienv/www/wp-content/cache/* /wp-content/cache-old/* /wp-content/backupwordpress-* /wp-content/mmr/* 
+rm -rf /wpmultienv/www/wpmultienv/wwwhost /wpmultienv/www/wp-content/cache/* /wp-content/cache-old/* /wp-content/backupwordpress-* /wp-content/mmr/* 
 
 if [ "$WWWHOST" = "$PRODWWWHOST" ]; then
 	echo "Detected deployment to production!"
@@ -44,14 +44,14 @@ if [ "$WWWHOST" = "$PRODWWWHOST" ]; then
 		exit 1
 	fi
 	echo "Updating robots.txt for production..."
-	cp -f /wpmultienv/www/robots.txt-prod /wpmultienv/www/robots.txt
+	cp -f /wpmultienv/www/wpmultienv/robots.txt-prod /wpmultienv/www/robots.txt
 	echo "Updating htaccess for production..."
-	cp -f /wpmultienv/www/htaccess-prod /wpmultienv/www/.htaccess
+	cp -f /wpmultienv/www/wpmultienv/htaccess-prod /wpmultienv/www/.htaccess
 else
 	echo "Updating robots.txt for development..."
-	cp -f /wpmultienv/www/robots.txt-dev /wpmultienv/www/robots.txt
+	cp -f /wpmultienv/www/wpmultienv/robots.txt-dev /wpmultienv/www/robots.txt
 	echo "Updating htaccess for development..."
-	cp -f /wpmultienv/www/htaccess-dev /wpmultienv/www/.htaccess
+	cp -f /wpmultienv/www/wpmultienv/htaccess-dev /wpmultienv/www/.htaccess
 fi
 
 echo "Dropping local database..."
@@ -75,9 +75,16 @@ mv /wpmultienv/www/* /var/www/html/
 echo "Clearing opcache if exists..."
 /usr/local/bin/cachetool opcache:reset >/dev/null 2>&1
 
-echo "Executing deploy script if available..."
-if [ -f /var/www/html/wpmultienv.deploy ]; then
-bash /var/www/html/wpmultienv.deploy
+if [ "$WWWHOST" = "$PRODWWWHOST" ]; then
+	echo "Executing post deployment script for production if available..."
+	if [ -f /var/www/html/wpmultienv/post-deploy-prod.sh ]; then
+		bash /var/www/html/wpmultienv/post-deploy-prod.sh
+	fi
+else
+	echo "Executing post deployment script for development if available..."
+	if [ -f /var/www/html/wpmultienv/post-deploy-dev.sh ]; then
+		bash /var/www/html/wpmultienv/post-deploy-dev.sh
+	fi
 fi
 
 echo "Removing old files..."
