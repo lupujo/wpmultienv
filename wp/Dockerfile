@@ -4,12 +4,13 @@ ARG WWWDATA_GID
 ARG WWWHOST
 RUN usermod -u ${WWWDATA_UID} www-data
 RUN groupmod -g ${WWWDATA_GID} www-data
-RUN apt-get -y update && apt-get -y install mariadb-client awscli mailutils
+RUN apt-get -y update && apt-get -y install mariadb-client awscli mailutils less
 RUN mkdir -p /wpmultienv
 RUN echo ${WWWHOST} > /wpmultienv/wwwhost
 ADD ./publish.sh /wpmultienv/publish.sh
 ADD ./deploy.sh /wpmultienv/deploy.sh
-RUN chmod 755 /wpmultienv/publish.sh /wpmultienv/deploy.sh
+RUN curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN chmod 755 /wpmultienv/publish.sh /wpmultienv/deploy.sh /usr/local/bin/wp
 RUN ln -s /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-enabled/default-ssl.conf
 RUN ln -s /etc/apache2/mods-available/ssl.conf /etc/apache2/mods-enabled/ssl.conf                  
 RUN ln -s /etc/apache2/mods-available/ssl.load /etc/apache2/mods-enabled/ssl.load
