@@ -44,14 +44,14 @@ if [ "$WWWHOST" = "$PRODWWWHOST" ]; then
 		exit 1
 	fi
 	echo "Updating robots.txt for production..."
-	mv -f /wpmultienv/www/robots.txt-prod /wpmultienv/www/robots.txt
+	cp -f /wpmultienv/www/robots.txt-prod /wpmultienv/www/robots.txt
 	echo "Updating htaccess for production..."
-	mv -f /wpmultienv/www/htaccess-prod /wpmultienv/www/.htaccess
+	cp -f /wpmultienv/www/htaccess-prod /wpmultienv/www/.htaccess
 else
 	echo "Updating robots.txt for development..."
-	mv -f /wpmultienv/www/robots.txt-dev /wpmultienv/www/robots.txt
+	cp -f /wpmultienv/www/robots.txt-dev /wpmultienv/www/robots.txt
 	echo "Updating htaccess for development..."
-	mv -f /wpmultienv/www/htaccess-dev /wpmultienv/www/.htaccess
+	cp -f /wpmultienv/www/htaccess-dev /wpmultienv/www/.htaccess
 fi
 
 echo "Dropping local database..."
