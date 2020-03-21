@@ -29,6 +29,7 @@ SSL Key: ```[Main Folder]/env[1-3]/ssl/ssl.key``` \
 SSL Certificate & Chain: ```[Main Folder]/env[1-3]/ssl/ssl.cert```
 * Optional: Create file ```[Main Folder]/env[1-3]/www/robots.txt-dev``` (usually deny all) and ```[Main Folder]/env[1-3]/www/robots.txt-prod``` (usually allow all) per your needs in the Wordpress webroot folder, those will be deployed automatically depending on environment.
 * Optional: Create file ```[Main Folder]/env[1-3]/www/wpmultienv.postdeploy``` if you need any scripts / WP cli commands to run after deployments.
+* Optional: To autorun on startup, copy file ```wpmultienv.init-d-script``` into ```/etc/init.f/wpmultienv``` and execute ```chkconfig wpmultienv on```.
 
 # How it works
 * The action of "Publish" on an environment exports the entire wordpress website to S3 and returns a version tag that can be used in the future to deploy to other environments on the same server or on different servers. \
