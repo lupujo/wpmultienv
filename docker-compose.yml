@@ -130,8 +130,8 @@ services:
          context: ./wp
          dockerfile: ./Dockerfile
          args:
-           - WWWDATA_UID=${ENV1UID}
-           - WWWDATA_GID=${ENV1GID}
+           - WWWDATA_UID=${ENV3UID}
+           - WWWDATA_GID=${ENV3GID}
            - WWWHOST=${ENV3WWWHOST}
      container_name: wordpress-env3
      extra_hosts:
