@@ -27,7 +27,8 @@ jonathan.l@ongage.com
 * Optional: Update SSL key and certificate for envs you wish to use HTTPS: \
 SSL Key: ```[Main Folder]/env[1-3]/ssl/ssl.key``` \
 SSL Certificate & Chain: ```[Main Folder]/env[1-3]/ssl/ssl.cert```
-* Optional: Create robots.txt-dev (usually deny all) and robots.txt-prod (usually allow all) per your needs in the Wordpress webroot folder, those will be deployed automatically depending on environment.
+* Optional: Create file ```[Main Folder]/env[1-3]/www/robots.txt-dev``` (usually deny all) and ```[Main Folder]/env[1-3]/www/robots.txt-prod``` (usually allow all) per your needs in the Wordpress webroot folder, those will be deployed automatically depending on environment.
+* Optional: Create file ```[Main Folder]/env[1-3]/www/wpmultienv.postdeploy``` if you need any scripts / WP cli commands to run after deployments.
 
 # How it works
 * The action of "Publish" on an environment exports the entire wordpress website to S3 and returns a version tag that can be used in the future to deploy to other environments on the same server or on different servers. \
@@ -45,7 +46,6 @@ _Examples:_
 ```docker exec wordpress-env2 /wpmultienv/deploy.sh 111111111-dev.site.com-aaaaaaaaaaaa```
 
 # TODO
-* Add support for HTTPS
 * Add support to get deployment commands without SSH access (API? Web based panel?)
 * Add support to view apache/php logs without SSH access
 * Implement support for email notifications
