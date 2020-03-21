@@ -72,9 +72,9 @@ mv /wpmultienv/www/* /var/www/html/
 echo "Clearing opcache if exists..."
 /usr/local/bin/cachetool opcache:reset >/dev/null 2>&1
 
-echo "Executing post-deploy script if available..."
-if [ -f /var/www/html/wpmultienv.postdeploy ]; then
-bash /var/www/html/wpmultienv.postdeploy
+echo "Executing deploy script if available..."
+if [ -f /var/www/html/wpmultienv.deploy ]; then
+bash /var/www/html/wpmultienv.deploy
 fi
 
 echo "Removing old files..."
