@@ -4,6 +4,11 @@ source /wpmultienv/env
 WWWHOST=`cat /wpmultienv/wwwhost`
 TAG="`date +%s`-$WWWHOST-`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`"
 
+echo "Executing deploy script if available..."
+if [ -f /var/www/html/wpmultienv.deploy ]; then
+bash /var/www/html/wpmultienv.deploy
+fi
+
 echo "Dumping DB..."
 rm -f /wpmultienv/sql.bz2 >/dev/null 2>&1
 /usr/bin/mysqldump -uroot -p${SQLPASSROOT} -hdb wordpress | bzip2 > /wpmultienv/sql.bz2
