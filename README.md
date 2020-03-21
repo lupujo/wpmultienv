@@ -27,8 +27,11 @@ jonathan.l@ongage.com
 * Optional: Update SSL key and certificate for envs you wish to use HTTPS: \
 SSL Key: ```[Main Folder]/env[1-3]/ssl/ssl.key``` \
 SSL Certificate & Chain: ```[Main Folder]/env[1-3]/ssl/ssl.cert```
-* Optional: Create file ```[Main Folder]/env[1-3]/www/robots.txt-dev``` (usually deny all) and ```[Main Folder]/env[1-3]/www/robots.txt-prod``` (usually allow all) per your needs in the Wordpress webroot folder, those will be deployed automatically depending on environment.
-* Optional: Create file ```[Main Folder]/env[1-3]/www/wpmultienv.deploy``` if you need any scripts / WP cli commands to run before publishes & after deployments.
+* Optional: Create file ```[Main Folder]/env[1-3]/www/wpmultienv/robots.txt-dev``` (usually deny all) and ```[Main Folder]/env[1-3]/www/wpmultienv/robots.txt-prod``` (usually allow all) per your needs in the Wordpress webroot folder, those will be deployed automatically depending on environment.
+* Optional: Create custom scripts / WP cli commands for automated deployments: \
+```[Main Folder]/env[1-3]/www/wpmultienv/post-deploy-prod.sh``` - Post deployment for production. \
+```[Main Folder]/env[1-3]/www/wpmultienv/post-deploy-dev.sh``` - Post deployment for development. \
+```[Main Folder]/env[1-3]/www/wpmultienv/pre-publish.sh``` - Pre publish.
 * Optional: To autorun on startup, copy file ```wpmultienv.init-d-script``` into ```/etc/init.f/wpmultienv``` and execute ```chkconfig wpmultienv on```.
 
 # How it works
