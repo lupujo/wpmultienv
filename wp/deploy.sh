@@ -31,7 +31,7 @@ OLDWWWHOST=`cat /wpmultienv/www/wwwhost`
 echo "Removing undesired files..."
 rm -rf /wpmultienv/www/wwwhost /wpmultienv/www/wp-content/cache/* /wp-content/cache-old/* /wp-content/backupwordpress-* /wp-content/mmr/* 
 
-if [ "$WWWHOST" = "$PRODHOST" ]; then
+if [ "$WWWHOST" = "$PRODWWWHOST" ]; then
 	echo "Detected deployment to production!"
         echo "Running sanity checks..."
 	badresults=`grep -R dev.-www /wpmultienv/www | grep -v window.location.host.split | wc -l`
