@@ -6,6 +6,7 @@ RUN usermod -u ${WWWDATA_UID} www-data
 RUN groupmod -g ${WWWDATA_GID} www-data
 RUN apt-get -y update && apt-get -y install mariadb-client awscli mailutils less
 RUN mkdir -p /wpmultienv
+RUN chown -R www-data:www-data /wpmultienv /var/www
 RUN echo ${WWWHOST} > /wpmultienv/wwwhost
 ADD ./publish.sh /wpmultienv/publish.sh
 ADD ./deploy.sh /wpmultienv/deploy.sh
