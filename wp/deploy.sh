@@ -61,16 +61,19 @@ echo "Dropping local database..."
 echo "Importing new database..."
 mysql -uroot -p${SQLPASSROOT} -hdb wordpress < /wpmultienv/sql
 
+echo "Importing files..."
+mkdir -p /var/www/html-old
+mv /var/www/html/* /var/www/html-old/
+mv /wpmultienv/www/* /var/www/html/
+
+echo "Running search and replace from $OLDWWWHOST to $WWWHOST via Migrate DB plugin"
+wp migratedb find-replace --find=$OLDWWWHOST --replace=$WWWHOST
+
 echo "Running search and replace from $OLDWWWHOST to $WWWHOST in database..."
 mysql -uroot -p${SQLPASSROOT} wordpress -hdb -e"UPDATE wp_options SET option_value = replace(option_value, '$OLDWWWHOST', '$WWWHOST') WHERE option_name = 'home' OR option_name = 'siteurl';"
 mysql -uroot -p${SQLPASSROOT} wordpress -hdb -e"UPDATE wp_posts SET guid = replace(guid, '$OLDWWWHOST','$WWWHOST');"
 mysql -uroot -p${SQLPASSROOT} wordpress -hdb -e"UPDATE wp_posts SET post_content = replace(post_content, '$OLDWWWHOST', '$WWWHOST');"
 mysql -uroot -p${SQLPASSROOT} wordpress -hdb -e"UPDATE wp_postmeta SET meta_value = replace(meta_value, '$OLDWWWHOST', '$WWWHOST');"
-
-echo "Importing files..."
-mkdir -p /var/www/html-old
-mv /var/www/html/* /var/www/html-old/
-mv /wpmultienv/www/* /var/www/html/
 
 echo "Clearing opcache if exists..."
 /usr/local/bin/cachetool opcache:reset >/dev/null 2>&1
