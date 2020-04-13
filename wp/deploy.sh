@@ -34,8 +34,9 @@ rm -rf /wpmultienv/www/wpmultienv/wwwhost /wpmultienv/www/wp-content/cache/* /wp
 if [ "$WWWHOST" = "$PRODWWWHOST" ]; then
 	echo "Detected deployment to production!"
         echo "Running sanity checks..."
-	badresults=`grep -R dev.-www /wpmultienv/www | grep -v window.location.host.split | wc -l`
-	if [ $badresults != 0 ]; then
+        badresults1=`grep -R dev.-www /wpmultienv/www | grep -v window.location.host.split | wc -l`
+        badresults2=`grep -R staging-www /wpmultienv/www | grep -v window.location.host.split | wc -l`
+        if [ $badresults1 != 0 ] || [ $badresults2 != 0 ]; then
 		echo "===================================================="
 		echo "Website files being deployed to production expose"
 		echo "development endpoints."
