@@ -65,7 +65,9 @@ mysql -uroot -p${SQLPASSROOT} -hdb wordpress < /wpmultienv/sql
 echo "Importing files..."
 mkdir -p /var/www/html-old
 mv /var/www/html/* /var/www/html-old/
+mv /var/www/html/.* /var/www/html-old/
 mv /wpmultienv/www/* /var/www/html/
+mv /wpmultienv/www/.* /var/www/html/
 
 echo "Running search and replace from $OLDWWWHOST to $WWWHOST via Migrate DB plugin"
 wp migratedb find-replace --find=$OLDWWWHOST --replace=$WWWHOST
