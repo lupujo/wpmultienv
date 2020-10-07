@@ -15,6 +15,8 @@ RUN chmod 755 /wpmultienv/publish.sh /wpmultienv/deploy.sh /usr/local/bin/wp
 RUN ln -s /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-enabled/default-ssl.conf
 RUN ln -s /etc/apache2/mods-available/ssl.conf /etc/apache2/mods-enabled/ssl.conf                  
 RUN ln -s /etc/apache2/mods-available/ssl.load /etc/apache2/mods-enabled/ssl.load
+RUN ln -s /etc/apache2/mods-available/headers.load /etc/apache2/mods-enabled/headers.load
+RUN echo "Header set Access-Control-Allow-Origin \"*\"" >> /etc/apache2/conf-available/security.conf
 RUN ln -s /etc/apache2/mods-available/socache_shmcb.load /etc/apache2/mods-enabled/socache_shmcb.load
 RUN perl -p -i -e 's/SSLCertificate[File|Key].*//' /etc/apache2/sites-available/default-ssl.conf
 RUN perl -p -i -e 's/SSLEngine on/SSLEngine on\n\t\tSSLCertificateFile \/etc\/apache2\/ssl\/ssl.cert\n\t\tSSLCertificateKeyFile \/etc\/apache2\/ssl\/ssl.key\n\t\tSSLCertificateChainFile \/etc\/apache2\/ssl\/ssl.cert/' /etc/apache2/sites-available/default-ssl.conf
