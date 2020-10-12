@@ -27,11 +27,12 @@ jonathan.l@ongage.com
 * Optional: Update SSL key and certificate for envs you wish to use HTTPS: \
 SSL Key: ```[Main Folder]/env[1-3]/ssl/ssl.key``` \
 SSL Certificate & Chain: ```[Main Folder]/env[1-3]/ssl/ssl.cert```
-* Optional: Create per-environment robots.txt and htaccess by creating the following files: \
+* Optional: Create per-environment rewrites.conf, robots.txt and htaccess by creating the following files: \
 ```[Main Folder]/env[1-3]/www/wpmultienv/robots.txt-dev``` - robots.txt for development (usually deny all) \
 ```[Main Folder]/env[1-3]/www/wpmultienv/robots.txt-prod``` - robots.txt for production (usually default wp robot.txt) \
 ```[Main Folder]/env[1-3]/www/wpmultienv/htaccess-dev``` - .htaccess for for development (usually default wp .htaccess) \
-```[Main Folder]/env[1-3]/www/wpmultienv/htaccess-prod``` - .htaccess for for production (usually block wp-login.php)
+```[Main Folder]/env[1-3]/www/wpmultienv/htaccess-prod``` - .htaccess for for production (usually block wp-login.php) \
+```[Main Folder]/env[1-3]/www/wpmultienv/rewrites.conf``` - Rewrite rules (MAINURL placeholder = Current env URL)
 * Optional: Create custom scripts / WP cli commands for automated deployments: \
 ```[Main Folder]/env[1-3]/www/wpmultienv/post-deploy-prod.sh``` - Post deployment for production. \
 ```[Main Folder]/env[1-3]/www/wpmultienv/post-deploy-dev.sh``` - Post deployment for development. \
