@@ -47,6 +47,14 @@ Backup folder: ```/usr/local/wpmultienv```
 Restore folder: ```[Main Folder]```
 Restore folder: ```/usr/local/wpmultienv```
 Execute: ```cd /usr/local/wpmultienv; docker-compose down; docker-compose build; docker-compose up -d```
+Add to crontab: [See Rewrite crontab section]
+
+# Rewrite crontab
+Currently the server should run a cron to refresh rewrites per each env:
+```* * * * * docker exec wordpress-env1 /wpmultienv/refresh-rewrites.sh
+* * * * * docker exec wordpress-env2 /wpmultienv/refresh-rewrites.sh
+* * * * * docker exec wordpress-env3 /wpmultienv/refresh-rewrites.sh```
+Hopefully this can go away once we integrate it into cron inside each container.
 
 # How it works
 * The action of "Publish" on an environment exports the entire wordpress website to S3 and returns a version tag that can be used in the future to deploy to other environments on the same server or on different servers. \
@@ -70,3 +78,4 @@ _Examples:_
 * Add support to view apache/php logs without SSH access
 * Implement support for email notifications
 * Add checkpoints to all scripts to catch for errors and report properly
+* Execute refresh-rewrite cron from inside the container instead of from outside of it (see Rewrite crontab section)
