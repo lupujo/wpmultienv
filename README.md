@@ -39,6 +39,15 @@ SSL Certificate & Chain: ```[Main Folder]/env[1-3]/ssl/ssl.cert```
 ```[Main Folder]/env[1-3]/www/wpmultienv/pre-publish.sh``` - Pre publish.
 * Optional: To autorun on startup, copy file ```wpmultienv.init-d-script``` into ```/etc/init.f/wpmultienv``` and execute ```chkconfig wpmultienv on```.
 
+# Backup & Restore information (Per server)
+* Backup: \
+Backup folder: ```[Main Folder]```
+Backup folder: ```/usr/local/wpmultienv```
+* Restore: \
+Restore folder: ```[Main Folder]```
+Restore folder: ```/usr/local/wpmultienv```
+Execute: ```cd /usr/local/wpmultienv; docker-compose down; docker-compose build; docker-compose up -d```
+
 # How it works
 * The action of "Publish" on an environment exports the entire wordpress website to S3 and returns a version tag that can be used in the future to deploy to other environments on the same server or on different servers. \
 Publish from any env to S3 by running: \
@@ -46,7 +55,7 @@ Publish from any env to S3 by running: \
 * The action of "Deploy" on an environment requires a tag to be provided. It destroys the existing wordpress website and overrides it with a version from S3 that was previously published using the provided version tag. \
 Deploy from S3 to any env by running: \
 ```docker exec -u=www-data wordpress-<env> /wpmultienv/deploy.sh <tag>```
-Refresh rewrite rules by running: \
+Refresh rewrite rules by running (happens automatically once per minute anyway): \
 ```docker exec -it <env> /wpmultienv/refresh-rewrites.sh```
 
 _Examples:_
