@@ -31,12 +31,7 @@ OLDWWWHOST=`cat /wpmultienv/www/wpmultienv/wwwhost`
 echo "Removing undesired files..."
 rm -rf /wpmultienv/www/wpmultienv/wwwhost /wpmultienv/www/wp-content/cache/* /wpmultienv/www/wp-content/cache-old/* /wpmultienv/www/wp-content/backupwordpress-* /wpmultienv/www/wp-content/mmr/* 
 
-echo "Adding rewrite rules..."
-if [ -f /var/www/html/wpmultienv/rewrites.conf ]; then
-        cp -f /var/www/html/wpmultienv/rewrites.conf /etc/apache2/rewrites.conf
-        perl -p -i -e "s/MAINURL/$WWWHOST/g" /etc/apache2/rewrites.conf
-        /usr/sbin/apache2ctl graceful
-fi
+
 
 if [ "$WWWHOST" = "$PRODWWWHOST" ]; then
 	echo "Detected deployment to production!"
@@ -102,6 +97,13 @@ fi
 
 echo "Removing old files..."
 rm -rf /var/www/html-old
+
+echo "Adding rewrite rules..."
+if [ -f /var/www/html/wpmultienv/rewrites.conf ]; then
+	cp -f /var/www/html/wpmultienv/rewrites.conf /var/www/html/wpmultienv/rewrites-env.conf
+	perl -p -i -e "s/MAINURL/$WWWHOST/g" /var/www/html/wpmultienv/rewrites-env.conf
+	cp -f /var/www/html/wpmultienv/rewrites-env.conf /etc/apache2/rewrites/rewrites.conf
+fi
 
 #echo "Notifying..."
 #echo "Corpweb was deployed from TAG $TAG into $WWWHOST (`hostname`)" | mail -s "Corpweb was deployed" $NOTIFYLIST
