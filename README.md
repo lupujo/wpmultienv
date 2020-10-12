@@ -46,6 +46,8 @@ Publish from any env to S3 by running: \
 * The action of "Deploy" on an environment requires a tag to be provided. It destroys the existing wordpress website and overrides it with a version from S3 that was previously published using the provided version tag. \
 Deploy from S3 to any env by running: \
 ```docker exec -u=www-data wordpress-<env> /wpmultienv/deploy.sh <tag>```
+Refresh rewrite rules by running: \
+```docker exec -it <env> /wpmultienv/refresh-rewrites.sh```
 
 _Examples:_
 
