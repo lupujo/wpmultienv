@@ -23,3 +23,5 @@ RUN perl -p -i -e 's/SSLEngine on/SSLEngine on\n\t\tSSLCertificateFile \/etc\/ap
 RUN perl -p -i -e 's/SSLProtocol all -SSLv3/SSLProtocol all -SSLv3 -TLSv1 -TLSv1.1/' /etc/apache2/mods-available/ssl.conf
 RUN perl -p -i -e 's/\#SSLHonorCipherOrder on/SSLHonorCipherOrder on/' /etc/apache2/mods-available/ssl.conf
 RUN perl -p -i -e 's/DEFLATE application\/xml/DEFLATE application\/xml font\/ttf image\/x-icon image\/vnd.microsoft.icon/' /etc/apache2/mods-available/deflate.conf
+RUN perl -p -i -e 's/\#Include conf-available\/serve-cgi-bin.conf/IncludeOptional \/etc\/apache2\/rewrites.conf/' /etc/apache2/sites-available/000-default.conf
+RUN perl -p -i -e 's/\#Include conf-available\/serve-cgi-bin.conf/IncludeOptional \/etc\/apache2\/rewrites.conf/' /etc/apache2/sites-available/default-ssl.conf
