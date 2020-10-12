@@ -31,6 +31,13 @@ OLDWWWHOST=`cat /wpmultienv/www/wpmultienv/wwwhost`
 echo "Removing undesired files..."
 rm -rf /wpmultienv/www/wpmultienv/wwwhost /wpmultienv/www/wp-content/cache/* /wpmultienv/www/wp-content/cache-old/* /wpmultienv/www/wp-content/backupwordpress-* /wpmultienv/www/wp-content/mmr/* 
 
+echo "Adding rewrite rules..."
+if [ -f /var/www/html/wpmultienv/rewrites.conf ]; then
+        cp -f /var/www/html/wpmultienv/rewrites.conf /etc/apache2/rewrites.conf
+        perl -p -i -e "s/MAINURL/$WWWHOST/g" /etc/apache2/rewrites.conf
+        /usr/sbin/apache2ctl graceful
+fi
+
 if [ "$WWWHOST" = "$PRODWWWHOST" ]; then
 	echo "Detected deployment to production!"
         echo "Running sanity checks..."
